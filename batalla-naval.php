@@ -8,28 +8,59 @@
             <?php
                 $n = 10;    // n = filas
                 $m = 10;    // m = columnas
-                
-                /*$vaixells = [
-                    "f" => ["posisicions" => 1, "disponibles" => 4, "fitxa" => "F"],
-                    "s" => ["posisicions" => 2, "disponibles" => 3, "fitxa" => "S"],
-                    "d" => ["posisicions" => 3, "disponibles" => 2, "fitxa" => "D"],
-                    "p" => ["posisicions" => 4, "disponibles" => 1, "fitxa" => "P"]
-                ];*/
 
-                $options = ["f", "s", "d", "p"];
-
-                $tirar = [true, false];
+                /*$options = ["f", "s", "d", "p"];
 
                 $f = ["vaixells" => [
-                    ["x" => 3, "y" => 3], ["x" => 5, "y" => 5], ["x" => 7, "y" => 7], ["x" => 9, "y" => 9]
+                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false]],
+                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false]],
+                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false]],
+                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false]]
                 ]];
+
+                $s = ["vaixells" => [
+                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]],
+                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]],
+                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]]
+                ]];
+
+                $d = ["vaixells" => [
+                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]], 
+                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]]
+                ]];
+
+                $p = ["vaixells" => [
+                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]]
+                ]];
+
+                foreach ($f["vaixells"] as $key => $value) {
+                    // echo ($key == "x" || $key == "y" ? "x = ".$value : "");
+                    /*if ($key == "x" || $key == "y") {
+                        echo $key." = ".$value;
+                    }
+                    
+
+                    foreach ($value as $posicion) {
+                        echo "x = ".$posicion["x"]." and y = ".$posicion["y"]."<br>";
+                    }
+                }*/
+
+                $vaixells = [4,3,3,2,2,2,1,1,1,1];
+
+                $posicionsDefinitives = Array();
+
+                $posicions;
+
+                foreach ($vaixells as $vaixell) {
+                    $posicions .= Array(Array(rand(1,10), rand(1,10)));
+                }
 
                 for ($i = 0; $i < $n + 1; $i++) {   // i = index_fila || j = index_columna
                     echo "<tr>";
                     if ($i == 0) {
                         for ($j = 0; $j < $m + 1; $j++) {
                             echo ($j == 0
-                            ? "<td> </td>"
+                            ? "<td> — </td>"
                             : "<td>".$j."</td>");
                         }
                     }
@@ -41,15 +72,7 @@
                             }
                             
                             else {
-                                /*if ($vaixells["f"]["disponibles"] > 0 && $tirar.array_rand($tirar)) {
-                                    $vaixells["f"]["disponibles"] = $vaixells["f"]["disponibles"] - 1;
-                                    echo "<td>".$vaixells["f"]["fitxa"]."</td>";
-                                }*/
-                                
-                                //else {
-                                    echo "<td></td>";
-                                //}
-
+                                echo "<td></td>";
                             }
                         }
                     }
@@ -80,6 +103,11 @@
         background-color: violet;
     }
 
+    /*tr:first-child td:first-child {
+        background-color: #D6B4FC;
+        border: 0px solid;
+    }*/
+
     td {
         border: 1px solid;
         padding: 5px;
@@ -105,6 +133,7 @@
         height: 5px;
         background-color: #9400d3;
         margin-bottom: 19px;
+        border-color: #9400d3;
     }
     .vaixells h3 {
         text-align: center;
