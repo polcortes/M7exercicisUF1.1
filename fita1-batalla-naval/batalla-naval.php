@@ -44,8 +44,6 @@
 
                 $n = count($tablero);
                 $m = count($tablero[0]);
-                
-                // echo print_r($tablero);
 
                 for ($i = 0; $i < $n + 1; $i++) {   // i = index_fila || j = index_columna
                     echo "<tr>";
@@ -63,7 +61,7 @@
                                 echo "<td>".chr(($i-1)+65)."</td>"; 
                             } else {
                                 $contenido = $tablero[$i-1][$j-1];
-                                echo "<td>" . ($contenido == "" ? " " : $contenido) . "</td>";
+                                echo "<td>" . $contenido . "</td>";
                             }
                         }
                     }
@@ -93,11 +91,6 @@
         border-collapse: collapse;
         background-color: violet;
     }
-
-    /*tr:first-child td:first-child {
-        background-color: #D6B4FC;
-        border: 0px solid;
-    }*/
 
     td {
         border: 1px solid;
