@@ -9,51 +9,43 @@
                 $n = 10;    // n = filas
                 $m = 10;    // m = columnas
 
-                /*$options = ["f", "s", "d", "p"];
+                $barcos = [4,3,3,2,2,2,1,1,1,1];
 
-                $f = ["vaixells" => [
-                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false]],
-                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false]],
-                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false]],
-                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false]]
-                ]];
+                $tablero = array_fill(0, $n, array_fill(0, $m, ""));    // Tablero = [[10 columnas] [10 columnas] [10 columnas] [10 columnas] [10 columnas] [10 columnas] [10 columnas] [10 columnas] [10 columnas] [10 columnas]]
 
-                $s = ["vaixells" => [
-                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]],
-                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]],
-                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]]
-                ]];
+                shuffle($barcos);   // Desordenar barcos para que no salgan en orden.
 
-                $d = ["vaixells" => [
-                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]], 
-                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]]
-                ]];
+                foreach ($barcos as $barco) {
+                    $colocado = false;
+                    while (!$colocado) {
+                        $fila = rand(0, count($tablero) - 1);
+                        $columna = rand(0, count($tablero[0]) - 1);
+                        $direccion = rand(0, 1);    // 0 = horizontal || 1 = vertical
 
-                $p = ["vaixells" => [
-                    [["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false], ["x" => rand(1,10), "y" => rand(1,10), "placed" => false]]
-                ]];
-
-                foreach ($f["vaixells"] as $key => $value) {
-                    // echo ($key == "x" || $key == "y" ? "x = ".$value : "");
-                    /*if ($key == "x" || $key == "y") {
-                        echo $key." = ".$value;
+                        if ($direccion == 0) {
+                            // Cabe el barco en horizontal??
+                            if ($columna + $barco <= count($tablero[0])) {
+                                $colocado = true;
+                                for ($i = 0; $i < $barco; $i++) {
+                                    $tablero[$fila][$columna + $i] = $barco;
+                                }
+                            }
+                        } else {
+                            // Cabe el barco en vertical???
+                            if ($fila + $barco <= count($tablero)) {
+                                $colocado = true;
+                                for ($i = 0; $i < $barco; $i++) {
+                                    $tablero[$fila + $i][$columna] = $barco;
+                                }
+                            }
+                        }
                     }
-                    
-
-                    foreach ($value as $posicion) {
-                        echo "x = ".$posicion["x"]." and y = ".$posicion["y"]."<br>";
-                    }
-                }*/
-
-                $vaixells = [4,3,3,2,2,2,1,1,1,1];
-
-                $posicionsDefinitives = Array();
-
-                $posicions;
-
-                foreach ($vaixells as $vaixell) {
-                    $posicions .= Array(Array(rand(1,10), rand(1,10)));
                 }
+
+                $n = count($tablero);
+                $m = count($tablero[0]);
+                
+                // echo print_r($tablero);
 
                 for ($i = 0; $i < $n + 1; $i++) {   // i = index_fila || j = index_columna
                     echo "<tr>";
@@ -69,10 +61,9 @@
                         for ($j = 0; $j < $m + 1; $j++) {
                             if ($j == 0) { 
                                 echo "<td>".chr(($i-1)+65)."</td>"; 
-                            }
-                            
-                            else {
-                                echo "<td></td>";
+                            } else {
+                                $contenido = $tablero[$i-1][$j-1];
+                                echo "<td>" . ($contenido == "" ? " " : $contenido) . "</td>";
                             }
                         }
                     }
